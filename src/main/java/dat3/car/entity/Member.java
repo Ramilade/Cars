@@ -5,6 +5,10 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -13,6 +17,12 @@ import lombok.Setter;
 
 @Entity
 public class Member {
+
+  @CreationTimestamp
+  private LocalDateTime createDateTime;
+
+  @UpdateTimestamp
+  private LocalDateTime updateDateTime;
 
   @Id
   private String username;

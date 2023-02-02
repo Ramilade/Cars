@@ -18,6 +18,7 @@ public class DeveloperData implements ApplicationRunner {
   CarRepository carRepository;
 
 
+
   private final String passwordUsedByAll = "test12";
 
   @Override
@@ -28,10 +29,12 @@ public class DeveloperData implements ApplicationRunner {
     memberRepository.save(m2);
 
     Car c1 = new Car("Audi","Q4",200.0, 10);
-    Car c2 = new Car();
-    Car c3 = new Car();
+    Car c2 = new Car("Mazda", "6", 300.0, 15);
+    Car c3 = new Car("BMW", "330e",400.0,5);
 
     carRepository.save(c1);
+    carRepository.save(c2);
+    carRepository.save(c3);
 
   }
 }

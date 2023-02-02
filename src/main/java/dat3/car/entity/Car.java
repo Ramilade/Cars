@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,6 +20,11 @@ public class Car {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @CreationTimestamp
+  private LocalDateTime createDateTime;
+
+  @UpdateTimestamp
+  private LocalDateTime updateDateTime;
 
   @Column(name="car_brand",nullable = false, length = 50)
   private String brand;
@@ -25,6 +34,7 @@ public class Car {
   private double pricePrDay;
   @Column(name="max_discount")
   private int bestDiscount;
+
 
   public Car(String brand, String model, double pricePrDay, int bestDiscount) {
     this.brand = brand;
