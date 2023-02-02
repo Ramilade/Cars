@@ -9,6 +9,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @Configuration
 public class DeveloperData implements ApplicationRunner {
@@ -25,6 +30,28 @@ public class DeveloperData implements ApplicationRunner {
   public void run(ApplicationArguments args) throws Exception {
     Member m1 = new Member("member1", passwordUsedByAll, "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lyngby", "2800");
     Member m2 = new Member("member2", passwordUsedByAll, "aaa@dd.dk", "Hanne", "Wonnegut", "Lyngbyvej 2", "Lyngby", "2800");
+
+
+    List<String> favColor1 = new ArrayList<>();
+    favColor1.add("Blue");
+    favColor1.add("White");
+
+    List<String> favColor2 = new ArrayList<>();
+    favColor2.add("Black");
+    favColor2.add("Yellow");
+
+    m1.setFavoriteCarColors(favColor1);
+    m2.setFavoriteCarColors(favColor2);
+
+    Map<String,String> phones = new HashMap<>();
+
+    phones.put("mobile", "12345678");
+    phones.put("work", "87654321");
+
+    m1.setPhones(phones);
+    m2.setPhones(phones);
+
+
     memberRepository.save(m1);
     memberRepository.save(m2);
 

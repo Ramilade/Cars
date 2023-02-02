@@ -1,7 +1,6 @@
 package dat3.car.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Getter
@@ -23,6 +26,14 @@ public class Member {
 
   @UpdateTimestamp
   private LocalDateTime updateDateTime;
+
+  @ElementCollection
+  List<String> favoriteCarColors = new ArrayList<>();
+
+  @ElementCollection
+  @MapKeyColumn(name = "description")
+  @Column(name = "phone_number")
+  Map<String,String> phones = new HashMap<>();
 
   @Id
   private String username;
