@@ -45,6 +45,7 @@ public class DeveloperData implements ApplicationRunner {
 
     Map<String,String> phones = new HashMap<>();
 
+
     phones.put("mobile", "12345678");
     phones.put("work", "87654321");
 

@@ -22,7 +22,7 @@ import java.util.Map;
 public class Member {
 
   @CreationTimestamp
-  private LocalDateTime createDateTime;
+  private LocalDateTime created;
 
   @UpdateTimestamp
   private LocalDateTime updateDateTime;
@@ -30,10 +30,12 @@ public class Member {
   @ElementCollection
   List<String> favoriteCarColors = new ArrayList<>();
 
+// man kan slette nedenstående
   @ElementCollection
   @MapKeyColumn(name = "description")
   @Column(name = "phone_number")
   Map<String,String> phones = new HashMap<>();
+//man kan slette ovenstående
 
   @Id
   private String username;
@@ -58,5 +60,6 @@ public class Member {
     this.city = city;
     this.zip = zip;
   }
+
 
 }
