@@ -2,11 +2,7 @@ package dat3.car.api;
 
 import dat3.car.dto.MemberRequest;
 import dat3.car.dto.MemberResponse;
-import dat3.car.entity.Member;
-import dat3.car.repository.MemberRepository;
 import dat3.car.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +27,11 @@ public MemberController(MemberService memberService) {
 
   //ADMIN
   @GetMapping(path = "/{username}")
-  MemberResponse getMemberById(@PathVariable String username) throws Exception {return null;}
+  MemberResponse getMemberById(@PathVariable String username)
+      throws Exception {
+  return memberService.getMemberById(username);
+  }
+
 
   //ANONYMOUS
   //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,17 +42,23 @@ public MemberController(MemberService memberService) {
 
   //MEMBER
   @PutMapping("/{username}")
-  ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
-    return null;
+  ResponseEntity<MemberResponse> updateMember(@PathVariable String username, @RequestBody MemberRequest body){
+    return ResponseEntity.ok().body(memberService.addMember(body));
   }
 
   //ADMIN
   @PatchMapping("/ranking/{username}/{value}")
-  void setRankingForUser(@PathVariable String username, @PathVariable int value) {}
+  void setRankingforUser(@PathVariable String username, @PathVariable int value){
+    memberService.setRankingForUser(username, value);
+  }
 
   //ADMIN
   @DeleteMapping("/{username}")
-  void deleteMemberByUsername(@PathVariable String username) {}
+  void deleteMemberByUsername(@PathVariable String username) {
+    memberService.deleteMemberByUsername(username);
+  }
+
+
 
 
 
