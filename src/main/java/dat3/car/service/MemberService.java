@@ -5,6 +5,7 @@ import dat3.car.dto.MemberResponse;
 import dat3.car.entity.Member;
 import dat3.car.repository.MemberRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -54,19 +55,19 @@ public class MemberService {
     memberRepository.save(member);
   }
 
-  public void updateMember(String username, MemberRequest body) {
+  public ResponseEntity<Boolean> updateMember(String username, MemberRequest body) {
     Member member = memberRepository.findById(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
     member.setFirstName(body.getFirstName());
     member.setLastName(body.getLastName());
     member.setEmail(body.getEmail());
-    //member.setRanking(body.getRanking());
     memberRepository.save(member);
+    return new ResponseEntity<>(true, HttpStatus.OK);
   }
+
 
   public void deleteMemberByUsername(String username) {
     memberRepository.deleteById(username);
   }
-
 
 
 

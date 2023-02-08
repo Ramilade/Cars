@@ -42,8 +42,8 @@ public MemberController(MemberService memberService) {
 
   //MEMBER
   @PutMapping("/{username}")
-  ResponseEntity<MemberResponse> updateMember(@PathVariable String username, @RequestBody MemberRequest body){
-    return ResponseEntity.ok().body(memberService.addMember(body));
+  ResponseEntity<Boolean> updateMember(@PathVariable String username, @RequestBody MemberRequest body){
+    return memberService.updateMember(username, body);
   }
 
   //ADMIN
