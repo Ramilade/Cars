@@ -41,12 +41,13 @@ public class MemberService {
   public List<MemberResponse> getMembers(boolean includeAll) {
     List<Member> members = memberRepository.findAll();
     List<MemberResponse> memberResponses = members.stream().map(m -> new MemberResponse(m, includeAll)).toList();
+
     return memberResponses;
   }
 
-  public MemberResponse getMemberById(String username) throws Exception {
+  public MemberResponse getMemberById(String username, boolean includeAll) throws Exception {
     Member member = memberRepository.findById(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
-    return new MemberResponse(member, true);
+    return new MemberResponse(member, includeAll);
   }
 
   public void setRankingForUser(String username, int value) {
@@ -57,12 +58,17 @@ public class MemberService {
 
   public ResponseEntity<Boolean> updateMember(String username, MemberRequest body) {
     Member member = memberRepository.findById(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
+    member.setUsername(body.getUsername());
     member.setFirstName(body.getFirstName());
     member.setLastName(body.getLastName());
     member.setEmail(body.getEmail());
+    member.setCity(body.getCity());
+    member.setZip(body.getZip());
+    member.setStreet(body.getStreet());
     memberRepository.save(member);
     return new ResponseEntity<>(true, HttpStatus.OK);
   }
+
 
 
   public void deleteMemberByUsername(String username) {

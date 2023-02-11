@@ -22,19 +22,19 @@ public MemberController(MemberService memberService) {
   //ADMIN ONLY
   @GetMapping
   List<MemberResponse> getMembers(){
-    return memberService.getMembers(false);
+    return memberService.getMembers(true);
   }
 
   //ADMIN
   @GetMapping(path = "/{username}")
   MemberResponse getMemberById(@PathVariable String username)
       throws Exception {
-  return memberService.getMemberById(username);
+  return memberService.getMemberById(username, true);
   }
 
 
+
   //ANONYMOUS
-  //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @PostMapping
   MemberResponse addMember(@RequestBody MemberRequest body){
     return memberService.addMember(body);
