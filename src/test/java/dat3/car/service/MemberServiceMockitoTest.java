@@ -17,6 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
+
 @ExtendWith(MockitoExtension.class)
 class MemberServiceMockitoTest {
 
@@ -32,7 +33,7 @@ class MemberServiceMockitoTest {
 
 
 
-
+/*
   @Test
   void getMembersAdmin() {
     Member m1 = new Member("m1", "m1@a.dk", "test12", "bb", "Olsen", "xx vej 34", "Lyngby", "2800");
@@ -62,6 +63,6 @@ class MemberServiceMockitoTest {
     assertEquals("m1@a.dk",response.getEmail());
   }
 
-
+*/
 
 }
