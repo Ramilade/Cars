@@ -49,11 +49,5 @@ public class CarController {
         carService.deleteCarById(carId);
     }
 
-    //ADMIN
-    @PatchMapping("/bestDiscount/{carId}/{value}")
-    void setBestDiscount(@PathVariable int carId, @PathVariable double value){
-        carService.setBestDiscount(carId, value);
-    }
-
 
 }
