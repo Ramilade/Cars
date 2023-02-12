@@ -21,9 +21,9 @@ public class CarService {
 
         return cars.stream().map(c -> new CarResponse(c, includeAll)).toList();
     }
-    public CarResponse getCarById(int id, boolean includeAll) throws Exception {
+    public CarResponse getCarById(int id) throws Exception {
         Car car = carRepository.getReferenceById(id);
-        return new CarResponse(car, includeAll);
+        return new CarResponse(car, false);
     }
 
     public CarResponse addCar(CarRequest carRequest) {

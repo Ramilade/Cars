@@ -4,6 +4,7 @@ package dat3.car.api;
 import dat3.car.dto.CarRequest;
 import dat3.car.dto.CarResponse;
 import dat3.car.service.CarService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class CarController {
     //MEMBER
     @GetMapping(path = "/{carId}")
     CarResponse getCarById(@PathVariable int id) throws Exception {
-        return carService.getCarById(id, false);
+        return carService.getCarById(id);
     }
 
     //ANONYMOUS
