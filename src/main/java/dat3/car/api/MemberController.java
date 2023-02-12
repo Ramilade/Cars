@@ -33,7 +33,6 @@ public MemberController(MemberService memberService) {
   }
 
 
-
   //ANONYMOUS
   @PostMapping
   MemberResponse addMember(@RequestBody MemberRequest body){

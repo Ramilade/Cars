@@ -20,26 +20,37 @@ public class Car {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "created")
   @CreationTimestamp
   private LocalDateTime createDateTime;
 
+  @Column(name = "last_edited")
   @UpdateTimestamp
   private LocalDateTime updateDateTime;
 
   @Column(name="car_brand",nullable = false, length = 50)
   private String brand;
+
   @Column(name="car_model",nullable = false, length = 60)
   private String model;
+
   @Column(name="rental_price_day")
   private double pricePrDay;
+
   @Column(name="max_discount")
-  private int bestDiscount;
+  private double bestDiscount;
 
 
-  public Car(String brand, String model, double pricePrDay, int bestDiscount) {
+  public Car(String brand, String model, double pricePrDay, double bestDiscount) {
     this.brand = brand;
     this.model = model;
     this.pricePrDay = pricePrDay;
     this.bestDiscount = bestDiscount;
+  }
+  public Car(int id, String brand, String model, double pricePrDay, double bestDiscount) {
+    this.id = id;
+    this.brand = brand;
+    this.model = model;
+    this.pricePrDay = pricePrDay;
   }
 }
