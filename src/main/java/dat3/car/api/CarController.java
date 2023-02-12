@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/cars")
-
 public class CarController {
     CarService carService;
 
@@ -27,9 +26,9 @@ public class CarController {
     }
 
     //MEMBER
-    @GetMapping(path = "/{carId}")
+    @GetMapping("/{id}")
     CarResponse getCarById(@PathVariable int id) throws Exception {
-        return carService.getCarById(id);
+        return carService.getCarById(id, true);
     }
 
     //ANONYMOUS
@@ -39,13 +38,13 @@ public class CarController {
     }
 
     //ADMIN
-    @PutMapping("/{carId}")
+    @PutMapping("/{Id}")
     ResponseEntity<Boolean> editCar(@RequestBody CarRequest body, @PathVariable int carId){
         return carService.editCar(body, carId);
     }
 
     //ADMIN
-    @DeleteMapping("/{carId}")
+    @DeleteMapping("/{Id}")
     void deleteCarById(@PathVariable int carId){
         carService.deleteCarById(carId);
     }
