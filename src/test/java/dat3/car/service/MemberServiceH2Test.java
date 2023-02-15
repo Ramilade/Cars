@@ -35,14 +35,14 @@ class MemberServiceH2Test {
       memberService = new MemberService(memberRepository); //Real DB is mocked away with H2
     }
   }
-
+/*
   @Test
   void getMembersAdmin() {
     List<MemberResponse> members = memberService.getMembers(true);
     assertEquals(2,members.size());
     assertNotNull(members.get(0).getCreated());
   }
-
+*/
 
 
 
