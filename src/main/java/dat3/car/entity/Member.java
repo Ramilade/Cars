@@ -17,9 +17,11 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
-public class Member {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "USER_TYPE")
+
+public class Member extends dat3.security.entity.UserWithRoles {
 
   @CreationTimestamp
   private LocalDateTime created;
@@ -37,10 +39,7 @@ public class Member {
   Map<String,String> phones = new HashMap<>();
 //man kan slette ovenstående
 
-  @Id
-  private String username;
-  private String password;
-  private String email;
+
   private String firstName;
   private String lastName;
   private String street;
@@ -51,9 +50,7 @@ public class Member {
 
   public Member(String user, String password, String email,
                 String firstName, String lastName, String street, String city, String zip) {
-    this.username = user;
-    this.password= password;
-    this.email = email;
+    super(user, password, email);
     this.firstName = firstName;
     this.lastName = lastName;
     this.street = street;

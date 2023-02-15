@@ -4,17 +4,21 @@ import dat3.car.entity.Car;
 import dat3.car.entity.Member;
 import dat3.car.repository.CarRepository;
 import dat3.car.repository.MemberRepository;
+import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
+@ComponentScan(basePackages = "dat3.security")
 @Configuration
 public class DeveloperData implements ApplicationRunner {
   @Autowired
@@ -24,7 +28,6 @@ public class DeveloperData implements ApplicationRunner {
 
 
 
-  private final String passwordUsedByAll = "test12";
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -64,7 +67,43 @@ public class DeveloperData implements ApplicationRunner {
     carRepository.save(c2);
     carRepository.save(c3);
 
+    setupUserWithRoleUsers();
+
   }
+  @Autowired
+  UserWithRolesRepository userWithRolesRepository;
+  final String passwordUsedByAll = "test12";
+
+
+  /*****************************************************************************************
+   NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
+   iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
+   *****************************************************************************************/
+
+  private void setupUserWithRoleUsers() {
+
+    System.out.println("******************************************************************************");
+    System.out.println("******* NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL ************");
+    System.out.println("******* REMOVE THIS BEFORE DEPLOYMENT, AND SETUP DEFAULT USERS DIRECTLY  *****");
+    System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
+    System.out.println("******************************************************************************");
+    dat3.security.entity.UserWithRoles user1 = new dat3.security.entity.UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
+    dat3.security.entity.UserWithRoles user2 = new dat3.security.entity.UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
+    dat3.security.entity.UserWithRoles user3 = new dat3.security.entity.UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
+    dat3.security.entity.UserWithRoles user4 = new dat3.security.entity.UserWithRoles("user4", passwordUsedByAll, "user4@a.dk");
+    user1.addRole(dat3.security.entity.Role.USER);
+    user1.addRole(dat3.security.entity.Role.ADMIN);
+    user2.addRole(dat3.security.entity.Role.USER);
+    user3.addRole(dat3.security.entity.Role.ADMIN);
+    //No Role assigned to user4
+    userWithRolesRepository.save(user1);
+    userWithRolesRepository.save(user2);
+    userWithRolesRepository.save(user3);
+    userWithRolesRepository.save(user4);
+  }
+
+
+
 }
 
 
