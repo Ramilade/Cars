@@ -7,6 +7,7 @@ import dat3.car.entity.Reservation;
 import dat3.car.repository.CarRepository;
 import dat3.car.repository.MemberRepository;
 import dat3.car.repository.ReservationRepository;
+import dat3.car.service.ReservationService;
 import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -34,6 +35,9 @@ public class DeveloperData implements ApplicationRunner {
   UserWithRolesRepository userWithRolesRepository;
   @Autowired
   ReservationRepository reservationRepository;
+
+  @Autowired
+    ReservationService reservationService = new ReservationService(carRepository, memberRepository, reservationRepository);
 
 
 
@@ -88,6 +92,9 @@ public class DeveloperData implements ApplicationRunner {
     reservationRequest2.setCarId(2);
     reservationRequest2.setMemberId("member2");
     reservationRequest2.setRentalDate(LocalDate.of(2023,2,18));
+
+    reservationService.createReservation(reservationRequest1);
+    reservationService.createReservation(reservationRequest2);
 
 
 

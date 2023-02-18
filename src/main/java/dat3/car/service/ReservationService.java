@@ -8,6 +8,7 @@ import dat3.car.entity.Reservation;
 import dat3.car.repository.CarRepository;
 import dat3.car.repository.MemberRepository;
 import dat3.car.repository.ReservationRepository;
+import dat3.security.entity.UserWithRoles;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,11 +22,13 @@ public class ReservationService {
     CarRepository carRepository;
     MemberRepository memberRepository;
     ReservationRepository reservationRepository;
+    UserWithRoles userWithRoles;
 
     public ReservationService(CarRepository carRepository, MemberRepository memberRepository, ReservationRepository reservationRepository) {
         this.carRepository = carRepository;
         this.memberRepository = memberRepository;
         this.reservationRepository = reservationRepository;
+        this.userWithRoles = userWithRoles;
     }
 
     public Reservation createReservation(ReservationRequest reservationRequest) {
