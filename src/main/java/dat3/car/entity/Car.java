@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Car {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -39,6 +41,10 @@ public class Car {
 
   @Column(name="max_discount")
   private double bestDiscount;
+
+  @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
+
 
 
   public Car(String brand, String model, double pricePrDay, double bestDiscount) {

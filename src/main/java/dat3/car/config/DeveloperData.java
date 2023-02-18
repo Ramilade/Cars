@@ -17,15 +17,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
-@ComponentScan(basePackages = "dat3.security")
+//@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
+//@ComponentScan(basePackages = "dat3.security")
 @Configuration
 public class DeveloperData implements ApplicationRunner {
+
   @Autowired
   MemberRepository memberRepository;
   @Autowired
   CarRepository carRepository;
+  @Autowired
+  UserWithRolesRepository userWithRolesRepository;
 
+  final String passwordUsedByAll = "test12";
 
 
 
@@ -70,9 +74,8 @@ public class DeveloperData implements ApplicationRunner {
     setupUserWithRoleUsers();
 
   }
-  @Autowired
-  UserWithRolesRepository userWithRolesRepository;
-  final String passwordUsedByAll = "test12";
+
+
 
 
   /*****************************************************************************************

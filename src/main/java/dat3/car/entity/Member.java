@@ -40,6 +40,9 @@ public class Member extends dat3.security.entity.UserWithRoles {
 //man kan slette ovenstående
 
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
+
   private String firstName;
   private String lastName;
   private String street;
