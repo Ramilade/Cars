@@ -27,7 +27,7 @@ public class ReservationResponse {
 
     public ReservationResponse(Reservation r) {
         this.reservationId = r.getId();
-        this.Id = r.getCar().getId();
+        this.Id = r.getCar().getCarId();
         this.brand = r.getCar().getBrand();
         this.model = r.getCar().getModel();
         this.rentalDate = r.getRentalDate();

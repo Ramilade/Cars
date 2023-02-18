@@ -35,7 +35,7 @@ public class CarService {
 
     public ResponseEntity<Boolean> editCar(CarRequest body, int carId) {
         Car updateCar = carRepository.getReferenceById(carId);
-        updateCar.setId(body.getId());
+        updateCar.setCarId(body.getCarId());
         updateCar.setBrand(body.getBrand());
         updateCar.setModel(body.getModel());
         updateCar.setPricePrDay(body.getPricePrDay());

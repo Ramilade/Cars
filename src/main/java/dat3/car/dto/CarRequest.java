@@ -11,17 +11,17 @@ import lombok.Setter;
 
 public class CarRequest {
 
-    int id;
+    int CarId;
     String brand;
     String model;
     double pricePrDay;
     double bestDiscount;
 
     public static Car getCarEntity(CarRequest c) {
-        return new Car(c.id, c.brand, c.model, c.pricePrDay, c.bestDiscount);
+        return new Car(c.CarId, c.brand, c.model, c.pricePrDay, c.bestDiscount);
     }
     public CarRequest(Car c) {
-        this.id = c.getId();
+        this.CarId = c.getCarId();
         this.brand = c.getBrand();
         this.model = c.getModel();
         this.pricePrDay = c.getPricePrDay();

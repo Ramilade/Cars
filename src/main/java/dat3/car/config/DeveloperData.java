@@ -1,9 +1,12 @@
 package dat3.car.config;
 
+import dat3.car.dto.ReservationRequest;
 import dat3.car.entity.Car;
 import dat3.car.entity.Member;
+import dat3.car.entity.Reservation;
 import dat3.car.repository.CarRepository;
 import dat3.car.repository.MemberRepository;
+import dat3.car.repository.ReservationRepository;
 import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -12,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +32,10 @@ public class DeveloperData implements ApplicationRunner {
   CarRepository carRepository;
   @Autowired
   UserWithRolesRepository userWithRolesRepository;
+  @Autowired
+  ReservationRepository reservationRepository;
+
+
 
   final String passwordUsedByAll = "test12";
 
@@ -70,6 +78,21 @@ public class DeveloperData implements ApplicationRunner {
     carRepository.save(c1);
     carRepository.save(c2);
     carRepository.save(c3);
+
+    ReservationRequest reservationRequest1 = new ReservationRequest();
+    reservationRequest1.setCarId(1);
+    reservationRequest1.setMemberId("member1");
+    reservationRequest1.setRentalDate(LocalDate.of(2023,2,18));
+
+    ReservationRequest reservationRequest2 = new ReservationRequest();
+    reservationRequest2.setCarId(2);
+    reservationRequest2.setMemberId("member2");
+    reservationRequest2.setRentalDate(LocalDate.of(2023,2,18));
+
+
+
+
+
 
     setupUserWithRoleUsers();
 

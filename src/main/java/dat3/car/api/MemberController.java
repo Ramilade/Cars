@@ -28,7 +28,7 @@ public MemberController(MemberService memberService) {
   //ADMIN
   @GetMapping(path = "/{username}")
   MemberResponse getMemberById(@PathVariable String username) throws Exception {
-    return memberService.getMemberByUsername(username, true);
+    return memberService.getMemberByUsername(username);
   }
 
 

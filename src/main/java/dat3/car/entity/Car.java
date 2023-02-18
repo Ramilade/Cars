@@ -20,7 +20,7 @@ public class Car {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private int CarId;
 
   @Column(name = "created")
   @CreationTimestamp
@@ -53,8 +53,8 @@ public class Car {
     this.pricePrDay = pricePrDay;
     this.bestDiscount = bestDiscount;
   }
-  public Car(int id, String brand, String model, double pricePrDay, double bestDiscount) {
-    this.id = id;
+  public Car(int CarId, String brand, String model, double pricePrDay, double bestDiscount) {
+    this.CarId = CarId;
     this.brand = brand;
     this.model = model;
     this.pricePrDay = pricePrDay;
