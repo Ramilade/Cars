@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 public class CarResponse {
-    int CarId;
+    int carId;
     String brand;
     String model;
     double pricePrDay;
@@ -29,7 +29,7 @@ public class CarResponse {
 
 
     public CarResponse(Car c, boolean includeAll) {
-        this.CarId = c.getCarId();
+        this.carId = c.getCarId();
         this.brand = c.getBrand();
         this.model = c.getModel();
         this.pricePrDay = c.getPricePrDay();
