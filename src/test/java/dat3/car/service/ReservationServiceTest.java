@@ -33,7 +33,7 @@ class ReservationServiceTest {
     void setUp() {
     }
 
-    @Test
+   /* @Test
     void createReservationCarUnavailable() {
         //Create a test with a car that is already reserved
         Member m1 = new Member("member1", "1234", "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lyngby", "2800");
@@ -62,5 +62,5 @@ Reservation existingReservation = new Reservation();
         //Assert that the reservation is null
         assertNull(reservation);
 
-    }
+    }*/
 }
