@@ -7,17 +7,18 @@ import dat3.car.entity.Reservation;
 import dat3.car.repository.CarRepository;
 import dat3.car.repository.MemberRepository;
 import dat3.car.repository.ReservationRepository;
+import lombok.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-@SpringBootTest
+@DataJpaTest
 class ReservationServiceTest {
 
     @Autowired
@@ -33,7 +34,7 @@ class ReservationServiceTest {
     void setUp() {
     }
 
-   /* @Test
+   @Test
     void createReservationCarUnavailable() {
         //Create a test with a car that is already reserved
         Member m1 = new Member("member1", "1234", "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lyngby", "2800");
@@ -62,5 +63,5 @@ Reservation existingReservation = new Reservation();
         //Assert that the reservation is null
         assertNull(reservation);
 
-    }*/
+    }
 }

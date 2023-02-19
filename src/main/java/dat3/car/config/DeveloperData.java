@@ -22,8 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
-//@ComponentScan(basePackages = "dat3.security")
+
 @Configuration
 public class DeveloperData implements ApplicationRunner {
 
@@ -86,12 +85,12 @@ public class DeveloperData implements ApplicationRunner {
     ReservationRequest reservationRequest1 = new ReservationRequest();
     reservationRequest1.setCarId(1);
     reservationRequest1.setMemberId("member1");
-    reservationRequest1.setRentalDate(LocalDate.of(2023,2,18));
+    reservationRequest1.setRentalDate(LocalDate.of(2023,2,28));
 
     ReservationRequest reservationRequest2 = new ReservationRequest();
     reservationRequest2.setCarId(2);
     reservationRequest2.setMemberId("member2");
-    reservationRequest2.setRentalDate(LocalDate.of(2023,2,18));
+    reservationRequest2.setRentalDate(LocalDate.of(2023,2,28));
 
     reservationService.createReservation(reservationRequest1);
     reservationService.createReservation(reservationRequest2);

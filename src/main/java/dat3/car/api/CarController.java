@@ -28,11 +28,11 @@ public class CarController {
     //MEMBER
     @GetMapping("/{id}")
     CarResponse getCarById(@PathVariable int id) throws Exception {
-        return carService.getCarById(id, true);
+        return carService.getCarById(id);
     }
 
     //ANONYMOUS
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     CarResponse addCar(@RequestBody CarRequest body){
         return carService.addCar(body);
     }

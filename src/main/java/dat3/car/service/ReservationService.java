@@ -22,13 +22,12 @@ public class ReservationService {
     CarRepository carRepository;
     MemberRepository memberRepository;
     ReservationRepository reservationRepository;
-    UserWithRoles userWithRoles;
+
 
     public ReservationService(CarRepository carRepository, MemberRepository memberRepository, ReservationRepository reservationRepository) {
         this.carRepository = carRepository;
         this.memberRepository = memberRepository;
         this.reservationRepository = reservationRepository;
-        this.userWithRoles = userWithRoles;
     }
 
     public Reservation createReservation(ReservationRequest reservationRequest) {

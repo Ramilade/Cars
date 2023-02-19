@@ -33,7 +33,7 @@ public class Reservation {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate rentalDate;
 
-    public Reservation(Car car, Member member, LocalDate rentalDate) {
+    public Reservation(Car car, Member member,LocalDate rentalDate) {
         this.car = car;
         this.member = member;
         this.rentalDate = rentalDate;
