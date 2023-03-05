@@ -92,8 +92,8 @@ public class DeveloperData implements ApplicationRunner {
     reservationRequest2.setMemberId("member2");
     reservationRequest2.setRentalDate(LocalDate.of(2023,2,28));
 
-    reservationService.createReservation(reservationRequest1);
-    reservationService.createReservation(reservationRequest2);
+    //reservationService.createReservation(reservationRequest1);
+    //reservationService.createReservation(reservationRequest2);
 
 
 
