@@ -5,38 +5,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class CarRequest {
 
-    int carId;
+    int id;
     String brand;
     String model;
     double pricePrDay;
     double bestDiscount;
 
-    public static Car getCarEntity(CarRequest c) {
-        return new Car(c.carId, c.brand, c.model, c.pricePrDay, c.bestDiscount);
-    }
+    //convert Car Entity to Car DTO
     public CarRequest(Car c) {
-        this.carId = c.getCarId();
+        this.id = c.getId();
         this.brand = c.getBrand();
         this.model = c.getModel();
         this.pricePrDay = c.getPricePrDay();
         this.bestDiscount = c.getBestDiscount();
     }
 
-    public CarRequest(String brand, String model, double pricePrDay, double bestDiscount) {
-        this.brand = brand;
-        this.model = model;
-        this.pricePrDay = pricePrDay;
-        this.bestDiscount = bestDiscount;
+    public static Car getCarEntity(CarRequest c) {
+        return new Car(c.id, c.brand, c.model, c.pricePrDay, c.bestDiscount);
     }
-
-
 }
-
-
-

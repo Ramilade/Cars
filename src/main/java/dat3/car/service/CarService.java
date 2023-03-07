@@ -9,32 +9,37 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CarService {
     CarRepository carRepository;
 
+
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
-    public List<CarResponse> getCars(boolean includeAll) {
-        List<Car> cars = carRepository.findAll();
 
-        return cars.stream().map(c -> new CarResponse(c, includeAll)).toList();
+
+    public void deleteCarById(int carId) {
+        Car car = carRepository.findById(carId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));
+        carRepository.delete(car);
     }
-    public CarResponse getCarById(int id) {
-        Car car = carRepository.getReferenceById(id);
+
+    public CarResponse addCar(CarRequest body) {
+        Car car = CarRequest.getCarEntity(body);
+        carRepository.save(car);
         return new CarResponse(car, false);
     }
 
-    public CarResponse addCar(CarRequest carRequest) {
-        Car newCar = CarRequest.getCarEntity(carRequest);
-        newCar = carRepository.save(newCar);
-
-        return new CarResponse(newCar, false);
+    public List<CarResponse> getCars(boolean b) {
+        List<Car> cars = carRepository.findAll();
+        List<CarResponse> carResponses = cars.stream()
+                .map(car -> new CarResponse(car, b)).toList();
+        return carResponses;
     }
-
 
     public ResponseEntity<Boolean> editCar(CarRequest body, int carId) {
         Car car = carRepository.findById(carId).orElseThrow(() ->
@@ -47,24 +52,29 @@ public class CarService {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    /*public ResponseEntity<Boolean> editCar(CarRequest body, int carId) {
-        Car updateCar = carRepository.getReferenceById(carId);
-        updateCar.setCarId(body.getCarId());
-        updateCar.setBrand(body.getBrand());
-        updateCar.setModel(body.getModel());
-        updateCar.setPricePrDay(body.getPricePrDay());
-
-        carRepository.save(updateCar);
-        return ResponseEntity.ok(true);
-    }*/
-
-    public void setBestDiscount(int id, double value) {
+    public CarResponse getCarById(int id) {
         Car car = carRepository.getReferenceById(id);
-        car.setBestDiscount(value);
-        carRepository.save(car);
+        return new CarResponse(car, false);
     }
 
-    public void deleteCarById(int id) {
-        carRepository.deleteById(id);
+
+    public List<CarResponse> getCarByBrandAndModel(String carBrand, String carModel) {
+        List<Car> car = carRepository.getCarByBrandAndModel(carBrand, carModel);
+        List<CarResponse> carResponses = car.stream()
+                .map(c -> new CarResponse(c, false)).toList();
+        return carResponses;
+    }
+
+    public Double getAveragePrice() {
+        int carSum = carRepository.findAll().size();
+        double totalSum = carRepository.findAll().stream().mapToDouble(Car::getPricePrDay).sum();
+        return totalSum / carSum;
+    }
+
+    public List<CarResponse> getAvailableCars() {
+        List<Car> cars = carRepository.findAllNotReserved();
+        List<CarResponse> carResponses = cars.stream()
+                .map(car -> new CarResponse(car, false)).toList();
+        return carResponses;
     }
 }

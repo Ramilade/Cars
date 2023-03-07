@@ -78,55 +78,24 @@
     <tbody></tbody>
 </table>
 <script>
-    // Get the table bodies where we will insert the cars and members
-    const carTableBody = document.querySelector("#carTable tbody");
-    const memberTableBody = document.querySelector("#memberTable tbody");
+    // Get the table body where we will insert the cars
+    const carTableBody = document.querySelector('#carTable tbody');
 
-    // Fetch the cars data from the server and add them to the table
-    const fetchCars = () => {
-        fetch("api/cars")
-            .then((response) => response.json())
-            .then((cars) => {
-                // Clear any existing rows in the table
-                carTableBody.innerHTML = "";
-
-                // Iterate over the list of cars and add them to the table
-                cars.forEach((car) => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                            <td>${car.id}</td>
-                            <td>${car.brand}</td>
-                            <td>${car.model}</td>
-                            <td>${car.pricePerDay}</td>
-                        `;
-                    carTableBody.appendChild(row);
-                });
-            })
-            .catch((error) => console.error(error));
-    };
-
-    // Fetch the members data from the server and add them to the table
-    const fetchMembers = () => {
-        fetch("api/members")
-            .then((response) => response.json())
-            .then((members) => {
-                // Clear any existing rows in the table
-                memberTableBody.innerHTML = "";
-
-                // Iterate over the list of members and add them to the table
-                members.forEach((member) => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                            <td>${member.firstName}</td>
-                            <td>${member
-                                .lastName}</td>
-                            <td>${member.street}</td>
-                            <td>${member.city}</td>
-                            <td>${member.zip}</td>
-                        `;
-                    memberTableBody.appendChild(row);
-                });
-            })
-            .catch((error) => console.error(error));
-    };
+    // Fetch the cars data from the server
+    fetch('api/cars')
+        .then(response => response.json())
+        .then(cars => {
+            // Iterate over the list of cars and add them to the table
+            cars.forEach(car => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${car.id}</td>
+                <td>${car.brand}</td>
+                <td>${car.model}</td>
+                <td>${car.pricePrDay}</td>
+            `;
+                carTableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error(error));
 </script>

@@ -7,36 +7,34 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
 public class CarResponse {
-    int carId;
+    int id;
     String brand;
     String model;
     double pricePrDay;
     double bestDiscount;
+    @JsonFormat(pattern = "dd-MM-yyyy",shape = JsonFormat.Shape.STRING)
+    LocalDate created;
 
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
-    LocalDateTime created;
+    @JsonFormat(pattern = "dd-MM-yyyy",shape = JsonFormat.Shape.STRING)
+    LocalDate edited;
 
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
-    LocalDateTime edited;
-
-
+    //convert Car Entity to Car DTO
     public CarResponse(Car c, boolean includeAll) {
-        this.carId = c.getCarId();
+        this.id = c.getId();
         this.brand = c.getBrand();
         this.model = c.getModel();
         this.pricePrDay = c.getPricePrDay();
         this.bestDiscount = c.getBestDiscount();
         if(includeAll){
-            this.created = c.getCreateDateTime();
-            this.edited = c.getUpdateDateTime();
+            this.created = c.getCreated();
+            this.edited = c.getLastEdited();
         }
     }
 }
