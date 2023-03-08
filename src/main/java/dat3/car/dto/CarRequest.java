@@ -17,7 +17,7 @@ public class CarRequest {
     double pricePrDay;
     double bestDiscount;
 
-    //convert Car Entity to Car DTO
+
     public CarRequest(Car c) {
         this.id = c.getId();
         this.brand = c.getBrand();

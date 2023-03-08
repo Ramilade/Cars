@@ -25,7 +25,7 @@ public class CarResponse {
     @JsonFormat(pattern = "dd-MM-yyyy",shape = JsonFormat.Shape.STRING)
     LocalDate edited;
 
-    //convert Car Entity to Car DTO
+
     public CarResponse(Car c, boolean includeAll) {
         this.id = c.getId();
         this.brand = c.getBrand();
