@@ -1,14 +1,15 @@
 package dat3.car.dto;
 
-import dat3.car.entity.Member;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import dat3.car.entity.Member;
 
 @Getter
 @Setter
 @NoArgsConstructor
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberRequest {
   String username;
   String email;
@@ -20,7 +21,8 @@ public class MemberRequest {
   String zip;
 
   public static Member getMemberEntity(MemberRequest m){
-    return new Member(m.username,m.getPassword(),m.getEmail(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
+    return new Member(m.username,m.getPassword(),m.getEmail(), m.firstName, m.lastName,m.getStreet(),
+            m.getCity(), m.getZip());
   }
 
   // Member to MemberRequest conversion

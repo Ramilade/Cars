@@ -3,52 +3,51 @@ package dat3.car.api;
 import dat3.car.dto.MemberRequest;
 import dat3.car.dto.MemberResponse;
 import dat3.car.service.MemberService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/members")
-@CrossOrigin
-
 class MemberController {
+
   MemberService memberService;
 
-public MemberController(MemberService memberService) {
+  public MemberController(MemberService memberService) {
     this.memberService = memberService;
   }
-
 
   //ADMIN ONLY
   @GetMapping
   List<MemberResponse> getMembers(){
-    return memberService.getMembers(true);
+    return memberService.getMembers(false);
   }
 
   //ADMIN
   @GetMapping(path = "/{username}")
   MemberResponse getMemberById(@PathVariable String username) throws Exception {
-    return memberService.getMemberByUsername(username);
+    return memberService.getMemberById(username);
   }
 
-
-
   //ANONYMOUS
-  @PostMapping
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   MemberResponse addMember(@RequestBody MemberRequest body){
     return memberService.addMember(body);
   }
 
   //MEMBER
   @PutMapping("/{username}")
-  ResponseEntity<Boolean> updateMember(@PathVariable String username, @RequestBody MemberRequest body){
-    return memberService.updateMember(username, body);
+  ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
+    return memberService.editMember(body, username);
   }
 
   //ADMIN
   @PatchMapping("/ranking/{username}/{value}")
-  void setRankingforUser(@PathVariable String username, @PathVariable int value){
+  void setRankingForUser(@PathVariable String username, @PathVariable int value) {
     memberService.setRankingForUser(username, value);
   }
 
@@ -58,16 +57,4 @@ public MemberController(MemberService memberService) {
     memberService.deleteMemberByUsername(username);
   }
 
-
-
-
-
-
 }
-
-
-
-
-
-
-

@@ -1,6 +1,8 @@
 package dat3.car.entity;
 
+import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,35 +15,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "USER_TYPE")
+public class Member extends UserWithRoles {
 
-public class Member extends dat3.security.entity.UserWithRoles {
-
-  @CreationTimestamp
-  private LocalDateTime created;
-
-  @UpdateTimestamp
-  private LocalDateTime updateDateTime;
-
-  @ElementCollection
-  List<String> favoriteCarColors = new ArrayList<>();
-
-// man kan slette nedenstående
-  @ElementCollection
-  @MapKeyColumn(name = "description")
-  @Column(name = "phone_number")
-  Map<String,String> phones = new HashMap<>();
-//man kan slette ovenstående
-
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
 
   private String firstName;
   private String lastName;
@@ -50,6 +33,23 @@ public class Member extends dat3.security.entity.UserWithRoles {
   private String zip;
   private boolean approved;
   private int ranking;
+
+  @CreationTimestamp
+  private LocalDateTime created;
+  @UpdateTimestamp
+  private LocalDateTime lastEdited;
+  @ElementCollection
+  List<String> favoriteCarColors = new ArrayList<>();
+  @ElementCollection
+  @MapKeyColumn(name = "description")
+  @Column(name = "phone_number")
+  Map<String,String> phones = new HashMap<>();
+
+  @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Reservation> reservations;
+
+
+
 
   public Member(String user, String password, String email,
                 String firstName, String lastName, String street, String city, String zip) {
@@ -60,6 +60,5 @@ public class Member extends dat3.security.entity.UserWithRoles {
     this.city = city;
     this.zip = zip;
   }
-
 
 }

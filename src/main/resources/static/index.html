@@ -78,24 +78,71 @@
     <tbody></tbody>
 </table>
 <script>
-    // Get the table body where we will insert the cars
+    const carTable = document.querySelector('#carTable');
     const carTableBody = document.querySelector('#carTable tbody');
+    const memberTable = document.querySelector('#memberTable');
+    const memberTableBody = document.querySelector('#memberTable tbody');
+    const fetchCarsBtn = document.querySelector('#fetchCarsBtn');
+    const fetchMembersBtn = document.querySelector('#fetchMembersBtn');
 
-    // Fetch the cars data from the server
-    fetch('api/cars')
-        .then(response => response.json())
-        .then(cars => {
-            // Iterate over the list of cars and add them to the table
-            cars.forEach(car => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
+    let carsLoaded = false;
+    let membersLoaded = false;
+
+    fetchCarsBtn.addEventListener('click', () => {
+        if (!carsLoaded) {
+            fetch('api/cars')
+                .then(response => response.json())
+                .then(cars => {
+                    cars.forEach(car => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
                 <td>${car.id}</td>
                 <td>${car.brand}</td>
                 <td>${car.model}</td>
                 <td>${car.pricePrDay}</td>
-            `;
-                carTableBody.appendChild(row);
-            });
-        })
-        .catch(error => console.error(error));
+              `;
+                        carTableBody.appendChild(row);
+                    });
+                    carTable.style.display = 'table';
+                    fetchCarsBtn.textContent = 'Hide cars';
+                    carsLoaded = true;
+                })
+                .catch(error => console.error(error));
+        } else {
+            carTableBody.innerHTML = '';
+            carTable.style.display = 'none';
+            fetchCarsBtn.textContent = 'Show cars';
+            carsLoaded = false;
+        }
+    });
+
+    fetchMembersBtn.addEventListener('click', () => {
+        if (!membersLoaded) {
+            fetch('api/members')
+                .then(response => response.json())
+                .then(members => {
+                    members.forEach(member => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                <td>${member.firstName}</td>
+                <td>${member.lastName}</td>
+                <td>${member.street}</td>
+                <td>${member.city}</td>
+                <td>${member.zip}</td>
+              `;
+                        memberTableBody.appendChild(row);
+                    });
+                    memberTable.style.display = 'table';
+                    fetchMembersBtn.textContent = 'Hide members';
+                    membersLoaded = true;
+                })
+                .catch(error => console.error(error));
+        } else {
+            memberTableBody.innerHTML = '';
+            memberTable.style.display = 'none';
+            fetchMembersBtn.textContent = 'Show members';
+            membersLoaded = false;
+        }
+    });
 </script>
+</body>
