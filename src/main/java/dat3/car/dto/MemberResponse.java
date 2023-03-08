@@ -33,7 +33,7 @@ public class MemberResponse {
   Boolean approved;
   List<ReservationResponse> reservations = new ArrayList<>();
 
-  //Convert Member Entity to Member DTO
+
   public MemberResponse(Member m, boolean includeAll) {
     this.username = m.getUsername();
     this.email = m.getEmail();

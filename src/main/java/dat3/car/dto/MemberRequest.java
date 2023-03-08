@@ -25,7 +25,7 @@ public class MemberRequest {
             m.getCity(), m.getZip());
   }
 
-  // Member to MemberRequest conversion
+
   public MemberRequest(Member m){
     this.username = m.getUsername();
     this.password = m.getPassword();

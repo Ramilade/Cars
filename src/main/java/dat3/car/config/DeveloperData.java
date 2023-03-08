@@ -83,9 +83,6 @@ public class DeveloperData implements ApplicationRunner {
     m2.setPhones(phones);
 
 
-    //memberRepository.save(m1);
-    //memberRepository.save(m2);
-
     Car c1 = new Car("Audi","Q4",200.0, 10);
     Car c2 = new Car("Mazda", "6", 300.0, 15);
     Car c3 = new Car("BMW", "330e",400.0,5);
@@ -134,14 +131,6 @@ public class DeveloperData implements ApplicationRunner {
     reservationRequest2.setCarId(2);
     reservationRequest2.setMemberId("member2");
     reservationRequest2.setRentalDate(LocalDate.of(2023,2,28));
-
-    //reservationService.createReservation(reservationRequest1);
-    //reservationService.createReservation(reservationRequest2);
-
-
-
-
-
 
     setupUserWithRoleUsers();
 
