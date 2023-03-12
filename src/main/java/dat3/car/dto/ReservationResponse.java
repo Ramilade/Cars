@@ -20,6 +20,7 @@ public class ReservationResponse {
     private int carId;
     private String carBrand;
     private String carModel;
+    private double price;
 
 
 
@@ -29,6 +30,7 @@ public class ReservationResponse {
         this.id = r.getId();
         this.carBrand = r.getCar().getBrand();
         this.carModel = r.getCar().getModel();
+        this.price = r.getCar().getPricePrDay();
 
     }
 

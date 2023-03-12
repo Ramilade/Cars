@@ -32,8 +32,7 @@ public class DeveloperData implements ApplicationRunner {
   @Autowired
   ReservationRepository reservationRepository;
 
-  @Autowired
-    ReservationService reservationService = new ReservationService(carRepository, memberRepository, reservationRepository);
+
 
 
 
@@ -122,15 +121,16 @@ public class DeveloperData implements ApplicationRunner {
     carRepository.save(c14);
     carRepository.save(c15);
 */
-    ReservationRequest reservationRequest1 = new ReservationRequest();
-    reservationRequest1.setCarId(1);
-    reservationRequest1.setMemberId("member1");
-    reservationRequest1.setRentalDate(LocalDate.of(2023,2,28));
-
-    ReservationRequest reservationRequest2 = new ReservationRequest();
-    reservationRequest2.setCarId(2);
-    reservationRequest2.setMemberId("member2");
-    reservationRequest2.setRentalDate(LocalDate.of(2023,2,28));
+    reservationRepository.save(new Reservation(cars.get(0), m1, LocalDate.now(), LocalDate.of(2023,03,30)));
+    reservationRepository.save(new Reservation(cars.get(1), m3, LocalDate.now(), LocalDate.of(2023,03,29)));
+    reservationRepository.save(new Reservation(cars.get(3), m2, LocalDate.now(), LocalDate.of(2023,03,25)));
+    reservationRepository.save(new Reservation(cars.get(2), m4, LocalDate.now(), LocalDate.of(2023,04,10)));
+    reservationRepository.save(new Reservation(cars.get(4), m1, LocalDate.now(), LocalDate.of(2023,04,05)));
+    reservationRepository.save(new Reservation(cars.get(1), m5, LocalDate.now(), LocalDate.of(2023,04,03)));
+    reservationRepository.save(new Reservation(cars.get(3), m2, LocalDate.now(), LocalDate.of(2023,04,15)));
+    reservationRepository.save(new Reservation(cars.get(0), m3, LocalDate.now(), LocalDate.of(2023,04,20)));
+    reservationRepository.save(new Reservation(cars.get(2), m1, LocalDate.now(), LocalDate.of(2023,04,25)));
+    reservationRepository.save(new Reservation(cars.get(4), m4, LocalDate.now(), LocalDate.of(2023,04,27)));
 
     setupUserWithRoleUsers();
 
